@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm discussion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #0c0c0c;
+            color: #fff;
+        }
+
+        .image-container {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+        }
+
+        .image-container p {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .image-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        p {
+            color: aqua;
+        }
+
+        h2 {
+            color: aquamarine;
+            position: relative;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 500px;
+            /* Adjust width as needed */
+            height: 900px;
+            /* Adjust height as needed */
+            overflow: hidden;
+        }
+
+        .image-slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .image-slide {
+            flex: 0 0 auto;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 10px;
+            border: none;
+            outline: none;
+        }
+
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+
+        .image-row {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+        .image-row img {
+            max-width: 400px;
+            height: auto;
+            margin: 0 10px;
+        }
+        </style>
+    </style>
+</head>
+
+<body>
+
+    <div class="image-container">
+        <p><h1>Nussinov Algorithm for RNA Secondary Structure Prediction</h1>
+
+            <h2>Introduction</h2>
+            <p>The Nussinov algorithm is a dynamic programming approach used to predict the secondary structure of RNA molecules. RNA secondary structure refers to the spatial arrangement of base pairs within an RNA molecule, including the formation of stems, loops, and hairpin structures. Predicting RNA secondary structure is essential for understanding its biological function, such as in gene regulation, RNA folding, and drug design.</p>
+        
+            <h2>Algorithm Overview</h2>
+            <p>The Nussinov algorithm predicts RNA secondary structure by maximizing the number of base pairs while minimizing the number of unpaired bases. It achieves this by recursively exploring all possible base pairings within the RNA sequence and assigning a score to each possible secondary structure. The optimal secondary structure is then determined based on the highest score obtained.</p>
+        
+            <h2>Algorithm Steps</h2>
+            <ol>
+                <li><strong>Base Pairing Rules:</strong> The algorithm uses predefined base pairing rules, where adenine (A) pairs with uracil (U), and cytosine (C) pairs with guanine (G). These rules govern the formation of base pairs in RNA molecules.</li>
+                <li><strong>Dynamic Programming:</strong> The algorithm employs dynamic programming to efficiently explore all possible secondary structures of the RNA sequence. It constructs a dynamic programming table to store intermediate results, allowing for the reuse of previously computed subproblems.</li>
+                <li><strong>Recurrence Relation:</strong> The core of the algorithm lies in the recurrence relation used to compute the optimal score for folding a subsequence of the RNA sequence. The recurrence relation considers two possibilities at each step: (a) forming a base pair between two nucleotides or (b) leaving a nucleotide unpaired.</li>
+                <li><strong>Traceback:</strong> After computing the dynamic programming table, the algorithm performs a traceback step to reconstruct the optimal secondary structure. Starting from the top-left corner of the table, it traces back through the table to identify the nucleotides involved in forming base pairs, thereby determining the secondary structure.</li>
+                <li><strong>Output:</strong> The algorithm outputs the predicted secondary structure in dot-bracket notation, where paired bases are represented by parentheses ('(' and ')'), and unpaired bases are represented by dots ('.').</li>
+            </ol>
+        
+            <h2>Time Complexity</h2>
+            <p>The time complexity of the Nussinov algorithm is O(n^3), where n is the length of the RNA sequence. This complexity arises from the nested loops used to fill the dynamic programming table.</p>
+        
+            <h2>Applications</h2>
+            <p>The Nussinov algorithm has various applications in bioinformatics and computational biology:</p>
+            <ul>
+                <li><strong>RNA Structure Prediction:</strong> It is widely used to predict the secondary structure of RNA molecules, facilitating the study of RNA folding and function.</li>
+                <li><strong>RNA Folding Simulations:</strong> The predicted secondary structures serve as inputs for RNA folding simulations, aiding in the understanding of RNA folding kinetics and thermodynamics.</li>
+                <li><strong>RNA Design:</strong> The algorithm is employed in the design of functional RNA molecules, such as ribozymes, aptamers, and RNA-based therapeutics.</li>
+            </ul>
+        
+            <h2>Conclusion</h2>
+            <p>The Nussinov algorithm is a fundamental tool for RNA secondary structure prediction, providing insights into the structural properties and functional roles of RNA molecules. By leveraging dynamic programming principles, the algorithm efficiently computes the optimal secondary structure, enabling a wide range of applications in biological research and biomedical engineering.</p>    
+        <div class="image-row">
+            <img src="./img/1.jpeg" alt="Slide 1">
+            <img src="./img/2.jpeg" alt="Slide 2">
+            <img src="./img/3.png" alt="Slide 3">
+            <img src="./img/4.png" alt="Slide 4">
+        </div>
+        </div>
+</body>
+
+</html>

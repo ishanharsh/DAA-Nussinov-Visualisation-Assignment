@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visulaization</title>
+    <svg id="visualization" width="4000" height="1600"></svg>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.7.0/d3.min.js"></script>
+    <style>
+        .node {
+            fill: palegreen;
+            stroke: black;
+            stroke-width: 2px;
+        }
+
+        .link {
+            stroke: black;
+            stroke-width: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Nussinov Algorithm</h1>
+    <form>
+        <label for="sequence">Enter RNA sequence:</label><br>
+        <input type="text" id="sequence" name="sequence" required><br><br>
+        <button type="button" onclick="processSequence()">Calculate Structure</button>
+    </form>
+    <svg id="visualization"></svg>
+
+    <script>
+        function processSequence() {
+            const sequence = document.getElementById("sequence").value;
+            const nodes = [];
+            const links = [];
+
+            // Create nodes for each nucleotide
+            for (let i = 0; i < sequence.length; i++) {
+                nodes.push({ id: i, label: sequence[i] });
+            }
+
+            // Create links between adjacent nucleotides
+            for (let i = 0; i < sequence.length - 1; i++) {
+                links.push({ source: i, target: i + 1 });
+            }
+
+            // Set up SVG container
+            const svg = d3.select("#visualization");
+            const width = +svg.attr("width");
+            const height = +svg.attr("height");
+
+            // Define the force simulation
+            const simulation = d3.forceSimulation(nodes)
+                .force("link", d3.forceLink(links).id(d => d.id).distance(100).strength(1))
+                .force("charge", d3.forceManyBody().strength(-100))
+                .force("center", d3.forceCenter(width / 2, height / 2));
+
+            // Create links
+            const link = svg.selectAll(".link")
+                .data(links)
+                .enter().append("line")
+                .attr("class", "link");
+
+            // Create nodes
+            const node = svg.selectAll(".node")
+                .data(nodes)
+                .enter().append("circle")
+                .attr("class", "node")
+                .attr("r", 20)
+                .call(d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended));
+
+            // Add labels to nodes
+            const label = svg.selectAll(".label")
+                .data(nodes)
+                .enter().append("text")
+                .attr("class", "label")
+                .attr("text-anchor", "middle")
+                .attr("dy", ".35em")
+                .text(d => d.label);
+
+            // Update node positions on tick
+            simulation.on("tick", () => {
+                link.attr("x1", d => d.source.x)
+                    .attr("y1", d => d.source.y)
+                    .attr("x2", d => d.target.x)
+                    .attr("y2", d => d.target.y);
+
+                node.attr("cx", d => d.x)
+                    .attr("cy", d => d.y);
+
+                label.attr("x", d => d.x)
+                    .attr("y", d => d.y);
+
+                // Remove previously drawn lines
+                svg.selectAll(".structure-line").remove();
+
+                // Connect pairs in the structure array with red lines
+                const structure = nussinov(sequence);
+                for (const pair of structure) {
+                    svg.append("line")
+                        .attr("class", "structure-line")
+                        .attr("x1", nodes[pair[0]].x)
+                        .attr("y1", nodes[pair[0]].y)
+                        .attr("x2", nodes[pair[1]].x)
+                        .attr("y2", nodes[pair[1]].y)
+                        .style("stroke", "red")
+                        .style("stroke-width", 2);
+                }
+            });
+
+            // Functions for node dragging
+            function dragstarted(event, d) {
+                if (!event.active) simulation.alphaTarget(0.3).restart();
+                d.fx = d.x;
+                d.fy = d.y;
+            }
+
+            function dragged(event, d) {
+                d.fx = event.x;
+                d.fy = event.y;
+            }
+
+            function dragended(event, d) {
+                if (!event.active) simulation.alphaTarget(0);
+                d.fx = null;
+                d.fy = null;
+            }
+        }
+
+        function pairCheck(a, b) {
+            return (a === 'A' && b === 'U') || (a === 'U' && b === 'A') || (a === 'C' && b === 'G') || (a === 'G' && b === 'C');
+        }
+
+        function OPT(i, j, sequence, DP) {
+            if (i >= j - 4) {
+                return 0;
+            } else {
+                let unpaired = OPT(i, j - 1, sequence, DP);
+                let pairing = [];
+                for (let t = i; t < j - 4; ++t) {
+                    if (pairCheck(sequence[t], sequence[j])) {
+                        pairing.push(1 + OPT(i, t - 1, sequence, DP) + OPT(t + 1, j - 1, sequence, DP));
+                    }
+                }
+                if (pairing.length === 0) {
+                    pairing.push(0);
+                }
+                let paired = Math.max(...pairing);
+                return Math.max(unpaired, paired);
+            }
+        }
+
+        function traceback(i, j, structure, DP, sequence) {
+            if (j <= i) {
+                return;
+            } else if (DP[i][j] === DP[i][j - 1]) {
+                traceback(i, j - 1, structure, DP, sequence);
+            } else {
+                for (let k = i; k < j - 4; ++k) {
+                    if (pairCheck(sequence[k], sequence[j])) {
+                        if (k - 1 < 0) {
+                            if (DP[i][j] === DP[k + 1][j - 1] + 1) {
+                                structure.push([k, j]);
+                                traceback(k + 1, j - 1, structure, DP, sequence);
+                                break;
+                            }
+                        } else if (DP[i][j] === DP[i][k - 1] + DP[k + 1][j - 1] + 1) {
+                            structure.push([k, j]);
+                            traceback(i, k - 1, structure, DP, sequence);
+                            traceback(k + 1, j - 1, structure, DP, sequence);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        function writeStructure(sequence, structure) {
+            let dotBracket = '.'.repeat(sequence.length);
+            for (let s of structure) {
+                dotBracket = dotBracket.substring(0, Math.min(s[0], s[1])) + '(' + dotBracket.substring(Math.min(s[0], s[1]) + 1);
+                dotBracket = dotBracket.substring(0, Math.max(s[0], s[1])) + ')' + dotBracket.substring(Math.max(s[0], s[1]) + 1);
+            }
+            
+            return dotBracket;
+        }
+
+        function initialize(N) {
+            let DP = [];
+            for (let i = 0; i < N; i++) {
+                DP.push(new Array(N).fill(0));
+            }
+            for (let k = 0; k < 4; ++k) {
+                for (let i = 0; i < N - k; ++i) {
+                    let j = i + k;
+                    DP[i][j] = 0;
+                }
+            }
+            
+            return DP;
+        }
+
+        function nussinov(sequence) {
+            let N = sequence.length;
+            let DP = initialize(N);
+            let structure = [];
+
+            for (let k = 5; k < N; ++k) {
+                for (let i = 0; i < N - k; ++i) {
+                    let j = i + k;
+                    DP[i][j] = OPT(i, j, sequence, DP);
+                }
+            }
+
+            for (let i = 0; i < N; ++i) {
+                for (let j = 0; j < i; ++j) {
+                    DP[i][j] = DP[j][i];
+                }
+            }
+
+            traceback(0, N - 1, structure, DP, sequence);
+            console.log(structure.length)
+            console.log(structure)
+            console.log(DP)
+            console.log(writeStructure(sequence,structure))
+            return structure;
+        }
+    </script>
+</body>
+
+</html>

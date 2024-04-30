@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result analysis</title>
+    <style>
+        body {
+            background-color: #111;
+            /* Dark background color */
+            color: #fff;
+            /* Text color */
+            font-family: Arial, sans-serif;
+            /* Font family */
+            text-align: center;
+            /* Center align text */
+        }
+
+        .container {
+            border: 3px solid;
+            /* Rainbow border */
+            border-image: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
+            border-image-slice: 1;
+            padding: 20px;
+            /* Padding around content */
+            margin: auto;
+            /* Center the container */
+            max-width: 1000px;
+            /* Limit container width */
+            position: relative;
+            /* Relative position for shadow */
+            z-index: 1;
+            /* Ensure the container is above the shadow */
+            box-shadow: 0px 0px 35px rgba(0, 0, 255, 0.7), 0px 0px 35px rgba(75, 0, 130, 0.7), 0px 0px 35px rgba(238, 130, 238, 0.7);
+            /* Rainbow box shadow */
+        }
+
+        h1 {
+            font-size: 38px;
+            /* Big header size */
+            margin-top: 0;
+            /* Remove top margin */
+        }
+
+        h2 {
+            font-size: 28px;
+            /* Small header size */
+            margin-bottom: 24px;
+            /* Bottom margin */
+        }
+
+        h3 {
+            font-size: 19px;
+            /* Medium header size */
+            margin-bottom: 20px;
+            /* Bottom margin */
+        }
+
+        button {
+            background-color: #00ffcc;
+            /* Neon color */
+            color: #111;
+            /* Button text color */
+            padding: 20px 40px;
+            /* Button padding */
+            font-size: 24px;
+            /* Button font size */
+            border: none;
+            /* Remove button border */
+            cursor: pointer;
+            /* Cursor style */
+            margin: 20px;
+            /* Button margin */
+            border-radius: 30px;
+            /* Button border radius */
+            /* box-shadow: -3px 15px 9px rgba(196, 34, 255, 0.1); */
+            /* Button shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* Button transition */
+        }
+
+        button:hover {
+            background-color: #FFFF33;
+            /* Neon color on hover */
+            box-shadow: -3px 15px 7px rgba(196, 34, 255, 0.1);
+            /* Button shadow */
+            transform: translateY(-5px);
+            /* Button transform on hover */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid rgba(196, 34, 255, 0.1);
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: rgba(196, 34, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>RNA Secondary structure Predictions</h1>
+
+        <table>
+            <caption>Sequence 1: histone mRNA stem-loop from Homo sapiens (PDB 4QOZ, chain D)</caption>
+            <tr>
+                <th>Sequence</th>
+                <td>CCAAAGGCUCUUUUCAGAGCCACCCA</td>
+            </tr>
+            <tr>
+                <th>Number of pairs</th>
+                <td>6</td>
+            </tr>
+            <tr>
+                <th>Base Pairings</th>
+                <td>(5,15) (6,16) (7,17) (8,18) (9,19) (10,20)</td>
+            </tr>
+            <tr>
+                <th>Secondary structure Dot bracket notation</th>
+                <td>.....((((((....)))))).....</td>
+            </tr>
+            <tr>
+                <th>Number of pairs (Predicted)</th>
+                <td>6</td>
+            </tr>
+            <tr>
+                <th>Base Pairings (Predicted)</th>
+                <td>(6, 19) (0, 5) (7, 18) (8, 17) (9, 16) (10, 15)</td>
+            </tr>
+            <tr>
+                <th>Secondary structure Dot bracket notation (Predicted)</th>
+                <td>(....)(((((....)))))......</td>
+            </tr>
+            <tr>
+                <th>Timing Analysis</th>
+                <td>13 milliseconds</td>
+            </tr>
+            <img src="./img/1stdone.png" alt="" style="width: 837px; height: auto;"></img>
+            <img src="./img/1strna.png" alt=""></img>
+        </table>
+
+        <table>
+            <caption>Sequence 2: Roseiflexus sp. RS-1 CRISPR RNA direct repeat element</caption>
+            <tr>
+                <th>Sequence</th>
+                <td>GGCGAAGCCCGCCUGUGCGGGCUA</td>
+            </tr>
+            <tr>
+                <th>Number of pairs</th>
+                <td>7</td>
+            </tr>
+            <tr>
+                <th>Base Pairings</th>
+                <td>(5, 22) (6, 21) (7, 20) (8, 19) (9, 18) (10, 17) (11, 16) </td>
+            </tr>
+            <tr>
+                <th>Secondary structure Dot bracket notation</th>
+                <td>.....(((((((....))))))).</td>
+            </tr>
+            <tr>
+                <th>Number of pairs (Predicted)</th>
+                <td>7</td>
+            </tr>
+            <tr>
+                <th>Base Pairings (Predicted)</th>
+                <td>(4, 22) (6, 21) (7, 20) (8, 19) (9, 18) (10, 17) (11, 16) </td>
+            </tr>
+            <tr>
+                <th>Secondary structure Dot bracket notation (Predicted)</th>
+                <td>....(.((((((....))))))).</td>
+            </tr>
+            <tr>
+                <th>Timing Analysis</th>
+                <td>11 milliseconds</td>
+            </tr>
+            <img src="./img/2ndone.png" alt="" style="width: 772px; height: auto;"></img>
+            <img src="./img/2ndrna.png" alt=""></img>
+        </table>
+
+        <table>
+            <caption>Sequence 3: unclassified sequences S4-Flavobacteria ribosomal protein leader</caption>
+            <tr>
+                <th>Sequence</th>
+                <td>UACAUCGAAGGAUACUGACCUUAAUUCAUGAUUA</td>
+            </tr>
+            <tr>
+                <th>Number of pairs</th>
+                <td>10</td>
+            </tr>
+            <tr>
+                <th>Base Pairings</th>
+                <td>(0, 33) (1, 31) (2, 29) (3, 28) (4, 27) (6, 26) (7, 21) (8, 20) (9, 19) (10, 18)</td>
+            </tr>
+            <tr>
+                <th>Secondary structure Dot bracket notation (Actual)</th>
+                <td>(((((.(((((.......))))....)))).).)</td>
+            </tr>
+            <tr>
+                <th>Number of pairs (Predicted)</th>
+                <td>11</td>
+            </tr>
+            <tr>
+                <th>Base Pairings (Predicted)</th>
+                <td>(0, 33) (1, 31) (2, 29) (3, 28) (4, 27) (6, 26) (7, 21) (8, 20) (9, 19) (10, 18) (12, 17)</td>
+            </tr>
+            <tr>
+                <th>Secondary structure Dot bracket notation (Predicted)</th>
+                <td>(((((.(((((.(....)))))....)))).).)</td>
+            </tr>
+            <tr>
+                <th>Timing Analysis</th>
+                <td>261 milliseconds</td>
+            </tr>
+            <img src="./img/3rddone.png" alt="" style="width: 750px; height: auto;"></img>
+            <img src="./img/3rdrna.png" alt=""></img>
+        </table>
+
+        <table>
+            <caption>Sequence 4: Sus scrofa (pig) Sus_scrofa piRNA piR-ssc-772323</caption>
+            <tr>
+                <th>Sequence</th>
+                <td>CAUUGAUCGCCAGGGUUGAUUCGGCUGAUCUG</td>
+            </tr>
+            <tr>
+                <th>Number of pairs</th>
+                <td>9</td>
+            </tr>
+            <tr>
+                <th>Base Pairings</th>
+                <td>(0, 31) (1, 30) (4, 29) (5, 28) (6, 27) (7, 26) (8, 24) (9, 23) (10, 22)</td>
+            </tr>
+            <tr>
+                <th>Secondary structure Dot bracket notation</th>
+                <td>((..(((((((...........))).))))))</td>
+            </tr>
+            <tr>
+                <th>Number of pairs (Predicted)</th>
+                <td>10</td>
+            </tr>
+            <tr>
+                <th>Base Pairings (Predicted)</th>
+                <td>(0, 31) (1, 30) (4, 29) (5, 28) (6, 27) (7, 26) (8, 24) (9, 22) (10, 17) (11, 16)</td>
+            </tr>
+            <tr>
+                <th>Secondary structure Dot bracket notation (Predicted)</th>
+                <td>((..((((((((....))....).).))))))</td>
+            </tr>
+            <tr>
+                <th>Timing Analysis</th>
+                <td>195 milliseconds</td>
+            </tr>
+            <img src="./img/4rthdone.png" alt="" style="width: 847px; height: auto;"></img>
+            <img src="./img/4rthrna.png" alt=""></img>
+        </table>
+
+        <table>
+            <caption>Sequence 5: Cyanothece sp. PCC 7424 CRISPR RNA direct repeat element</caption>
+            <tr>
+                <th>Sequence</th>
+                <td>AGCGAAGCCCGCCUACGCGGGCUA</td>
+            </tr>
+            <tr>
+                <th>Number of pairs</th>
+                <td>7</td>
+            </tr>
+            <tr>
+                <th>Base Pairings</th>
+                <td>(5,16) (6,17) (7,18) (8,19) (9,20) (10,21) (11,22)</td>
+            </tr>
+            <tr>
+                <th>Secondary structure Dot bracket notation</th>
+                <td>.....(((((((....))))))).</td>
+            </tr>
+            <tr>
+                <th>Number of pairs (Predicted)</th>
+                <td>7</td>
+            </tr>
+            <tr>
+                <th>Base Pairings (Predicted)</th>
+                <td>(0, 22) (1, 21) (2, 19) (9, 18) (3, 8) (10, 17) (11, 16)</td>
+            </tr>
+            <tr>
+                <th>Secondary structure Dot bracket notation (Predicted)</th>
+                <td>((((....)(((....)))).)). </td>
+            </tr>
+            <tr>
+                <th>Timing Analysis</th>
+                <td>12 milliseconds</td>
+            </tr>
+            <img src="./img/5thdone.png" alt="" style="width: 645px; height: auto;"></img>
+            <img src="./img/5thrna.png" alt=""></img>
+        </table>
+
+    </div>
+
+</body>
+
+</html>

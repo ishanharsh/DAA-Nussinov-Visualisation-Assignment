@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <style>
+        body {
+            background-color: #111;
+            /* Dark background color */
+            color: #fff;
+            /* Text color */
+            font-family: Arial, sans-serif;
+            /* Font family */
+            text-align: center;
+            /* Center align text */
+        }
+
+        .container {
+            border: 3px solid;
+            /* Rainbow border */
+            border-image: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
+            border-image-slice: 1;
+            padding: 20px;
+            /* Padding around content */
+            margin: auto;
+            /* Center the container */
+            max-width: 1000px;
+            /* Limit container width */
+            position: relative;
+            /* Relative position for shadow */
+            z-index: 1;
+            /* Ensure the container is above the shadow */
+            box-shadow: 0px 0px 35px rgba(0, 0, 255, 0.7), 0px 0px 35px rgba(75, 0, 130, 0.7), 0px 0px 35px rgba(238, 130, 238, 0.7);
+            /* Rainbow box shadow */
+        }
+
+        h1 {
+            font-size: 38px;
+            /* Big header size */
+            margin-top: 0;
+            /* Remove top margin */
+        }
+
+        h2 {
+            font-size: 28px;
+            /* Small header size */
+            margin-bottom: 24px;
+            /* Bottom margin */
+        }
+
+        h3 {
+            font-size: 19px;
+            /* Medium header size */
+            margin-bottom: 20px;
+            /* Bottom margin */
+        }
+
+        button {
+            background-color: #00ffcc;
+            /* Neon color */
+            color: #111;
+            /* Button text color */
+            padding: 20px 40px;
+            /* Button padding */
+            font-size: 24px;
+            /* Button font size */
+            border: none;
+            /* Remove button border */
+            cursor: pointer;
+            /* Cursor style */
+            margin: 20px;
+            /* Button margin */
+            border-radius: 30px;
+            /* Button border radius */
+            /* box-shadow: -3px 15px 9px rgba(196, 34, 255, 0.1); */
+            /* Button shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* Button transition */
+        }
+
+        button:hover {
+            background-color: #FFFF33;
+            /* Neon color on hover */
+            box-shadow: -3px 15px 7px rgba(196, 34, 255, 0.1);
+            /* Button shadow */
+            transform: translateY(-5px);
+            /* Button transform on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>CS F364</h1>
+        <h1> Design & Analysis Of Algorithms</h1>
+        <h2>Implementation of the Nussinov algorithm</h2>
+        <h2>for</h2>
+        <h2>RNA secondary structure prediction</h2>
+        <button onclick="window.open('./algo.html', '_blank')">General discussion and documentation of the
+            algorithm</button>
+        <button onclick="window.open('./results.html','_blank')">Results and Timing
+            analysis</button>
+        <button onclick="window.open('./doc/html/index.html','_blank')">Code
+            Documentation</button>
+        <button onclick="window.open('./analysis.html','_blank')">References and Issues in coding</button>
+        <button onclick="window.open('./visualisation.html','_blank')">Visualization</button>
+        <button onclick="window.open('./visualize2.html','_blank')">Visualization 2</button>
+        <h4>GROUP R</h4>
+        <h4>ISHAN HARSH 2021A7PS2854H</h4>
+        <h4>MANOJ GUTTA 2021A7PS2629H</h4>
+        <h4>SHANMUKH TEJA REDDY SABBELLA 2021A7PS2516H</h4>
+        <h4>OMKAR BASANI 2021A7PS0433H</h4>
+        <h4>SUTAPALLI LIKHITH BHARGAV 2021A7PS0444H</h4>
+    </div>
+</body>
+
+</html>
